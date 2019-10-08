@@ -1350,7 +1350,7 @@ $lng['domains']['serveraliasoption_www'] = 'www (www.domain.tld)';
 $lng['domains']['serveraliasoption_none'] = 'Kein Alias';
 $lng['error']['givendirnotallowed'] = 'Das angegebene Verzeichnis im Feld %s ist nicht erlaubt.';
 $lng['serversettings']['ssl']['ssl_cipher_list']['title'] = 'Erlaubte SSL Ciphers festlegen';
-$lng['serversettings']['ssl']['ssl_cipher_list']['description'] = 'Dies ist eine Liste von Ciphers, die genutzt werden sollen (oder auch nicht genutzt werden sollen), wenn eine SSL Verbindung besteht. Eine Liste aller Ciphers und wie diese hinzugefügt/ausgeschlossen werden ist in den Abschnitten "CIPHER LIST FORMAT" und "CIPHER STRINGS" in <a href="http://openssl.org/docs/apps/ciphers.html">der man-page für Ciphers</a> zu finden.<br /><br /><b>Standard-Wert ist:</b><pre>ECDH+AESGCM:ECDH+AES256:!aNULL:!MD5:!DSS:!DH:!AES128</pre>';
+$lng['serversettings']['ssl']['ssl_cipher_list']['description'] = 'Dies ist eine Liste von Ciphers, die genutzt werden sollen (oder auch nicht genutzt werden sollen), wenn eine SSL Verbindung besteht. Eine Liste aller Ciphers und wie diese hinzugefügt/ausgeschlossen werden ist in den Abschnitten "CIPHER LIST FORMAT" und "CIPHER STRINGS" in <a href="https://www.openssl.org/docs/manmaster/man1/openssl-ciphers.html">der man-page für Ciphers</a> zu finden.<br /><br /><b>Standard-Wert ist:</b><pre>ECDH+AESGCM:ECDH+AES256:!aNULL:!MD5:!DSS:!DH:!AES128</pre>';
 
 // Added in Froxlor 0.9.31
 $lng['panel']['dashboard'] = 'Dashboard';
@@ -1713,3 +1713,6 @@ $lng['serversettings']['letsencryptecc']['title'] = "ECC / ECDSA Zertifikate aus
 $lng['serversettings']['letsencryptecc']['description'] = "Wenn eine Schlüsselgröße ausgewählt wird, werden ECC / ECDSA Zertifikate erstellt";
 $lng['serversettings']['froxloraliases']['title'] = "Domain Aliase für Froxlor Vhost";
 $lng['serversettings']['froxloraliases']['description'] = "Komma getrennte Liste von Domains, welche als Server Alias zum Froxlor Vhost hinzugefügt werden";
+
+$lng['serversettings']['ssl']['tlsv13_cipher_list']['title'] = 'Explizite TLSv1.3 Ciphers, wenn genutzt';
+$lng['serversettings']['ssl']['tlsv13_cipher_list']['description'] = 'Dies ist eine Liste von Ciphers, die genutzt werden sollen (oder auch nicht genutzt werden sollen), wenn eine TLSv1.3 Verbindung hergestellt werden soll. Eine Liste aller Ciphers und wie diese hinzugefügt/ausgeschlossen werden ist <a href="https://wiki.openssl.org/index.php/TLS1.3">der Dokumentation für TLSv1.3</a> zu entnehmen.<br /><br /><b>Standard-Wert ist leer</b>';

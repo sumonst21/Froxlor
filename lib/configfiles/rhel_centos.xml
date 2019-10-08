@@ -1529,7 +1529,7 @@ protocol sieve {
 #  %m - number of messages (before deletion)
 #  %s - mailbox size in bytes (before deletion)
 #  %u - old/new UIDL hash. may help finding out if UIDLs changed unexpectedly
-#pop3_logout_format = top=%t/%p, retr=%r/%b, del=%d/%m, size=%s
+pop3_logout_format = in=%i out=%o top=%t/%p, retr=%r/%b, del=%d/%m, size=%s
 
 # Workarounds for various client bugs:
 #   outlook-no-nuls:
@@ -2289,21 +2289,7 @@ ControlsLog			/var/log/proftpd/controls.log
 				<!-- Cronjob -->
 				<daemon name="cron" title="Cronjob for froxlor"
 					mandatory="true">
-					<file name="/etc/cron.d/froxlor" chown="root:0" chmod="0640">
-						<content><![CDATA[
-#
-# Set PATH, otherwise restart-scripts won't find start-stop-daemon
-#
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-#
-# Regular cron jobs for the froxlor package
-#
-# Please check that all following paths are correct
-#
-*/1 * * * *	root	/usr/bin/php -q <BASE_PATH>scripts/froxlor_master_cronjob.php
-]]>
-						</content>
-					</file>
+					<command><![CDATA[/usr/bin/php <BASE_PATH>scripts/froxlor_master_cronjob.php --run-task 99]]></command>
 					<command><![CDATA[{{settings.system.crondreload}}]]></command>
 				</daemon>
 				<!-- AWstats -->

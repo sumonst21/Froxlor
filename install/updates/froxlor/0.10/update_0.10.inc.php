@@ -220,6 +220,10 @@ if (\Froxlor\Froxlor::isDatabaseVersion('201902120')) {
 		$domain_in = substr($domain_in, 0, - 1);
 		Database::query("DELETE FROM `" . TABLE_PANEL_DOMAIN_SSL_SETTINGS . "` WHERE `domainid` IN (" . $domain_in . ")");
 	}
+	// check for froxlor domain using let's encrypt
+	if (Settings::Get('system.le_froxlor_enabled') == 1) {
+		Database::query("DELETE FROM `" . TABLE_PANEL_DOMAIN_SSL_SETTINGS . "` WHERE `domainid` = '0'");
+	}
 	lastStepStatus(0);
 
 	showUpdateStep("Inserting job to regenerate configfiles");
@@ -272,4 +276,52 @@ if (\Froxlor\Froxlor::isDatabaseVersion('201904250')) {
 	lastStepStatus(0);
 
 	\Froxlor\Froxlor::updateToDbVersion('201907270');
+}
+
+if (\Froxlor\Froxlor::isDatabaseVersion('201907270')) {
+
+	showUpdateStep("Cleaning up old files");
+	$to_clean = array(
+		"actions/admin/settings/000.version.php",
+		"actions/admin/settings/190.ticket.php",
+		"admin_tickets.php",
+		"customer_tickets.php",
+		"install/scripts/language-check.php",
+		"install/updates/froxlor/upgrade_syscp.inc.php",
+		"lib/classes",
+		"lib/configfiles/precise.xml",
+		"lib/cron_init.php",
+		"lib/cron_shutdown.php",
+		"lib/formfields/admin/tickets",
+		"lib/formfields/customer/tickets",
+		"lib/functions.php",
+		"lib/functions",
+		"lib/navigation/10.tickets.php",
+		"scripts/classes",
+		"scripts/jobs",
+		"templates/Sparkle/admin/tickets",
+		"templates/Sparkle/customer/tickets"
+	);
+	foreach ($to_clean as $filedir) {
+		$complete_filedir = \Froxlor\Froxlor::getInstallDir() . $filedir;
+		if (file_exists($complete_filedir)) {
+			Froxlor\FileDir::safe_exec("rm -rf " . escapeshellarg($complete_filedir));
+		}
+	}
+	lastStepStatus(0);
+
+	\Froxlor\Froxlor::updateToDbVersion('201909150');
+}
+
+if (\Froxlor\Froxlor::isFroxlorVersion('0.10.0-rc2')) {
+	\Froxlor\Froxlor::updateToVersion('0.10.0');
+}
+
+if (\Froxlor\Froxlor::isDatabaseVersion('201909150')) {
+
+	showUpdateStep("Adding TLSv1.3-cipherlist setting");
+	Settings::AddNew("system.tlsv13_cipher_list", '');
+	lastStepStatus(0);
+
+	\Froxlor\Froxlor::updateToDbVersion('201910030');
 }
